@@ -45,6 +45,8 @@ If you use ngrok, you have to disable https, because it does not work with https
 - In the launchSettings.json, remove the property “sslPort” in the “iisSettings”/”iisExpress” section or set its value to 0. Remember, these 2 changes are only required for development environment running on localhost.
 
 open ngrok and put this command: 
+ngrok http -host-header=localhost 5000
+
 
 7. Add to appsettings:
 "WebHooks": {
@@ -65,6 +67,19 @@ the webhook url is: http://a285e4e6062d.ngrok.io/api/webhooks/incoming/github
 
 9. Add an issue to your github repository and you will see in vs code the breack point will be fired.
 check data property to see all data
+
+
+OJO:  ese es el error:
+webhook github The JSON value could not be converted to System.Collections.Generic.IEnumerable`1[Newtonsoft.Json.Linq.JToken]
+
+puede ser el newtonsift:
+https://dotnetcoretutorials.com/2019/12/19/using-newtonsoft-json-in-net-core-3-projects/
+https://thecodebuzz.com/add-newtonsoft-json-support-net-core/
+
+otros links:
+https://github.com/dotnet/aspnetcore/issues/13293
+https://github.com/graphql-dotnet/graphql-dotnet/issues/1439
+https://github.com/readthedocs/readthedocs.org/issues/5426
 
 
 http://a285e4e6062d.ngrok.io/GitHubWebHookReceiver/incoming/github
