@@ -9,7 +9,7 @@ namespace webhookGitHubDropbox.Controllers
     public class DropBoxController : ControllerBase
     {        
         [DropboxWebHook]
-        public IActionResult DropboxHandler(string id, JObject data)
+        public IActionResult Dropbox(string id, JObject data)
         {
             if (!ModelState.IsValid)
             {
