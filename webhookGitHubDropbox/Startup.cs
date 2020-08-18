@@ -26,7 +26,8 @@ namespace webhookGitHubDropbox
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddNewtonsoftJson()
-                   .AddGitHubWebHooks();
+                   .AddGitHubWebHooks()
+                   .AddDropboxWebHooks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

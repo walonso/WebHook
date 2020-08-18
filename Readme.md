@@ -89,7 +89,57 @@ Json: (comment -> body)
 ------------------------- Drop box ---------------------------------------
 https://www.talkingdotnet.com/webhooks-with-asp-net-core-dropbox-and-github/
 
+13. Adding Nuget Package:
+dotnet add package Microsoft.AspNetCore.WebHooks.Receivers.Dropbox --version 1.0.0-preview2-final
 
+14. Add DropBox webhook (AddDropboxWebHooks):
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMvc().AddNewtonsoftJson()
+    .AddGitHubWebHooks()
+    .AddDropboxWebHooks();
+}
+
+15. Add the DropBox controller and decorate it action method with DropboxWebHook attribute
+public class DropBoxController : ControllerBase
+{        
+    [DropboxWebHook]
+    public IActionResult DropboxHandler(string id, JObject data)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        return Ok();
+	}
+}
+
+17.
+although the Controller is GitHubWebHookReceiverController, 
+the webhook url is: http://f23940d9372b.ngrok.io/api/webhooks/incoming/dropbox
+
+18 Create an application inside dropbox: (I called it as NetCoreWebhook)
+https://www.dropbox.com/developers/apps
+
+19. after creation of app, Get the app secret and add that to appsettings.json file:
+"WebHooks": {
+  "DropBox": {
+    "SecretKey": {
+      "default": "j5gco55if38p0ei"
+    }
+  }
+ 
+20. Run the application net core.
+ 
+21. Add the webhook url and add it.
+example: http://f23940d9372b.ngrok.io/api/webhooks/incoming/dropbox
+
+22. Add a breakpoint to the action method and upload a file to dropbox.
+
+
+
+
+kho47plaohp9r8q
 
 
 puede ser el newtonsift:
