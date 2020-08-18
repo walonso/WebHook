@@ -13,10 +13,10 @@ Go to this site: https://localhost:5001/WeatherForecast
 ------------ GitHub ------------------------
 https://dotnetthoughts.net/webhooks-in-aspnet-core/
 
-3. 
+3. Add GitHub nuget package
 dotnet add package Microsoft.AspNetCore.WebHooks.Receivers.GitHub --version 1.0.0-preview2-final
 
-4.
+4. Add Github method to startup
 modify the startup - ConfigureServices method to configure endpoint to receive notifications.
 public void ConfigureServices(IServiceCollection services)
 {
@@ -62,15 +62,35 @@ ngrok http -host-header=localhost 5000
 although the Controller is GitHubWebHookReceiverController, 
 the webhook url is: http://a285e4e6062d.ngrok.io/api/webhooks/incoming/github
 
+8. Add MVC Newtonsoft to the project (this allows to capture the json coming from GitHub)
+dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson --version 3.1.7
 
-8. run the application and add a breakpoint.
+(if package is not added, as soon as github sends a notification, you receive this error:
+webhook github The JSON value could not be converted to System.Collections.Generic.IEnumerable`1[Newtonsoft.Json.Linq.JToken])
 
-9. Add an issue to your github repository and you will see in vs code the breack point will be fired.
+
+9. Add Newtonsoft to startup:
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMvc().AddNewtonsoftJson()
+    .AddGitHubWebHooks();
+}
+
+
+10. Configure "Webhook" section on github:
+For referece: https://www.talkingdotnet.com/webhooks-with-asp-net-core-dropbox-and-github/
+
+11. run the application and add a breakpoint.
+
+12. Add an issue to your github repository and you will see in vs code the breack point will be fired.
 check data property to see all data
+Json: (comment -> body)
+
+------------------------- Drop box ---------------------------------------
+https://www.talkingdotnet.com/webhooks-with-asp-net-core-dropbox-and-github/
 
 
-OJO:  ese es el error:
-webhook github The JSON value could not be converted to System.Collections.Generic.IEnumerable`1[Newtonsoft.Json.Linq.JToken]
+
 
 puede ser el newtonsift:
 https://dotnetcoretutorials.com/2019/12/19/using-newtonsoft-json-in-net-core-3-projects/
