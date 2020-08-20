@@ -137,4 +137,5 @@ example: http://f23940d9372b.ngrok.io/api/webhooks/incoming/dropbox
 22. Add a breakpoint to the action method and upload a file to dropbox.
 
 
-----------
+23. add package to handle OAuth:
+dotnet add package Dropbox.Api --version 5.0.0
